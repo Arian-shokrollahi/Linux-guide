@@ -7,4 +7,3 @@
 - اونایی که مربوط به wsl همچین ساختاری دارند--->xx-wsl-topiconlesson
 - اونایی که مربوط به  virtual machineا-----> xx-vm-topiclesson
 - بعضی هم مربوط به هر دو هستند wsl & vmا --->xx-both--topiclesson
-- 
