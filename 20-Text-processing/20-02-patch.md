@@ -36,15 +36,15 @@
 ----
 ## مثالی برایه دستور patch & diff
 <p align="center">
-  <img src="20-image/Screenshot%20(316).png" alt="patch & diff" width="700">
+  <img src="20-image/patch.diff.png" alt="patch & diff" width="700">
 </p>
 
 ## حالا بریم درمورد این عکسه توضیح بدیم:
 
-- قسمت 1 اومدیم با دستور cat محتوا دو فایل رو نشون دادیم
-- قسمت 2 با دستور diff اومدیم تغییرات فایل پایه و جدید رو نشون 
-- قسمت 3 یه patch file ساختیم با  redirection operatior <
--  قسمت 4 با استفاده از دستور  patch file base رو با patch file به روز کردیم
-- قسمت 5 هم مشاهده میکنید فایل به روز شده
+-  اومدیم با دستور cat محتوا دو فایل رو نشون دادیم
+-  با دستور diff اومدیم تغییرات فایل پایه و جدید رو نشون 
+- یه patch file ساختیم با  redirection operatior <
+-   با استفاده از دستور  patch file base رو با patch file به روز کردیم
+-  هم مشاهده میکنید فایل به روز شده
 
 
