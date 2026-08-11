@@ -12,3 +12,7 @@
 ---
 
 # بریم یه مثال از این دستور رو ببینیم
+
+<p align="center">
+  <img src="20-image/aspell.png" alt="aspellcommand" width="900">
+</p>
