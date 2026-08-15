@@ -23,4 +23,6 @@
 
 - 2-اگر سیستم خوبی دارد باید از ماشین مجازی (virtual machine) استفاده کنید---> برای ماشین مجازی باید دوچیز رو بخونید:
 - [نصب لینوکس با VMware Workstation](../00-01-Installation.Linux/00-01-02-VMwareworkstation-Linux.md)
+- [آموزش تنظیمات VMware Workstatio+n+](https://github.com/Arian-shokrollahi/virtual.machine-VMwareworkstation)
+
 
