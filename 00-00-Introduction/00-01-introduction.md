@@ -17,12 +17,14 @@
 
 ## اولین چیزی که باید یاد بگیرید چیست؟
 
-- 1-اگر سیستم ضعیفی دارید باید WSL رو بریزید برید تویه این لینک---->
+### - 1-اگر سیستم ضعیفی دارید باید WSL رو بریزید برید تویه این لینک---->
 
 - [نصب لینوکس در WSL](../00-01-Installation.Linux/00-01-01-WSL-Linux.md)
 
-- 2-اگر سیستم خوبی دارد باید از ماشین مجازی (virtual machine) استفاده کنید---> برای ماشین مجازی باید دوچیز رو بخونید:
-- [نصب لینوکس با VMware Workstation](../00-01-Installation.Linux/00-01-02-VMwareworkstation-Linux.md)
+### - 2-اگر سیستم خوبی دارد باید از ماشین مجازی (virtual machine) استفاده کنید---> برای ماشین مجازی باید دوچیز رو بخونید:+
+
+#### ا <mark> حتما قبلش VMware workstation رو بخونید چون وقتتون رو نمیگیره و بدردتون میخوره تضمینی صد درصد 😏</mark>
+- [نصب لینوکس در VMware Workstation](../00-01-Installation.Linux/00-01-02-VMwareworkstation-Linux.md)
 - [آموزش تنظیمات VMware Workstatio+n+](https://github.com/Arian-shokrollahi/virtual.machine-VMwareworkstation)
 
 
