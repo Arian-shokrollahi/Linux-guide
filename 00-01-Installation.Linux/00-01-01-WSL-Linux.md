@@ -36,7 +36,9 @@
 <p align="center">
 	<img src="00-01-images/sitewsl.png" alt="wsl" width=500>
 </p>
+
 ---
+
 ## ا<mark>اگر سطحتون بالاست</mark>
 - 1 برید داخل پاور شل بزنید ====>wsl --list --online
 - 2 اون نسخه مد نظرتون رو پیدا کنید و بزنید ===>wsl -install -d namethatversion
