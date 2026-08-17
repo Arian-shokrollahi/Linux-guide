@@ -75,7 +75,7 @@ echo "Hello, World!"
 - 
 
 <p align="center">
-	<img src="/23-images/simple-script1.png" alt="script" width=500>
+	<img src="23-images/simple-script1.png" alt="script" width=500>
 </p>
 
 
