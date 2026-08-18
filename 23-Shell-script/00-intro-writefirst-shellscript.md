@@ -96,3 +96,6 @@ echo "Hello, World!"
 	<img src="23-images/simple-script3.png" alt="script" width=500>
 </p>
 - حالا در هرجایی بزنی hello.sh اون برنامه اجرا میشه چون مسیرش در مسیرهایه متغیر محیطی PATH تعریف شده است
+---
+برایه اینکه بگید دوباره bashrc رو بخون در:
+1-in homedir --->. .bashrc or source ~/.bashrc
