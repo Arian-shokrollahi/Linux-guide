@@ -9,7 +9,7 @@
 ا<mark>ما به جایه اون token میتونیم هر چیزی که دلمون میخواد بزاریم  ولی چون اکثرا EOF میزارن که مخفف end of line است ما هم از EOF  استفاده کردیم</mark>
 
 <p align="center">
-	<img src="23-images/EOFwithqoute.png" alt="heredoc.token" width=500>
+	<img src="23-images/token-heredoc.png" alt="heredoc.token" width=500>
 </p>
 
 ```
