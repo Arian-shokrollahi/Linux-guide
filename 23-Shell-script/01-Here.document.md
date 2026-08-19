@@ -81,3 +81,10 @@ EOF
 دیگه قضاوتش با خودتون🤣 با هرکدوم راحتید: من که Here document  انتخابمه.
 اینم درمورد heredocument و token نوشتم برید نگاه کنید باحاله:
 [heredoc.and.toke](../extra_technic/02-EOF-for-document.md)
+
+---
+## یه چیز باحال دیگه سینگل کوت و دابل کوت درون here document معنا خاصی ندارد و دیقیقا کارکاتر سینگل کوت و دابل کوت تفسیر میشود
+
+<p align="center">
+	<img src="23-images/qouteinheredoc.png" alt="qoute in heredoc" width=700>
+</p>
