@@ -48,3 +48,42 @@ show_info() {
 show_info
 
 ```
+---
+# یه مثال اخری هم بزنیمو بریم باهم تحلیلش کنیم که هر قسمت چیست:
+```bash
+ 1  #!/bin/bash
+     2
+     3  # local-vars: script to demonstrate local variables
+     4
+     5  foo=0  # global variable foo
+     6
+     7  funct_1() {
+     8      local foo  # variable foo local to funct_1
+     9      foo=1
+    10      echo "funct_1: foo = $foo"
+    11  }
+    12
+    13  funct_2() {
+    14      local foo  # variable foo local to funct_2
+    15      foo=2
+    16      echo "funct_2: foo = $foo"
+    17  }
+    18
+    19  echo "global:  foo = $foo"
+    20  funct_1
+    21  echo "global:  foo = $foo"
+    22  funct_2
+    23  echo "global:  foo = $foo"
+    ---
+    global:  foo = 0
+funct_1: foo = 1
+global:  foo = 0
+funct_2: foo = 2
+global:  foo = 0
+
+```
+- -در خط اول shebang تعریف شده که میگوید این برنامه توسط bash تفسیر میشود
+- -در خط 5 یه global variable یا متغیر سراسری تعریف شده
+- خط 7 و 13 دو تابع تعریف کردیم
+-  و در هر کدون یه متغیر محلی local variable به اسمهfoo که فقط درون همون تابع معتبره و قابل دسترس 
+-  همونطور که در خروجی مشاهده میکنید با اینکه هم اسم بودند اون متغیر هایه درون تابع ها با هم و با متغیر سراسری ولی تداخلی ایجاد نکردند چون گلوبال از هر جا قابل دسترسی است و محلی هم فقط برایه همون تابعی که درونه ان تعریف شده
