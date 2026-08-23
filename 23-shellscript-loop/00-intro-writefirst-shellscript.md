@@ -99,3 +99,17 @@ echo "Hello, World!"
 ---
 برایه اینکه بگید دوباره bashrc رو بخون در:
 1-in homedir --->. .bashrc or source ~/.bashrc
+
+---
+---
+
+##  اگر بخواهیم از  یوزر دیگه ای پوشه ای رو بزاریم درون  PATH که اون یوزر هر برنامه ای درست کرد برایه ما قابل اجرا باشد چه کنیم: 
+- ا-<mark>فرمول کلی اینه برایه اوردن مسیری برایه جستجتو در فایل هایه اجرایی یا در PATH</mark>
+- --->1-texteditor ./~bashrc --->if you choose nano as text editor write alt + / for go to last line
+- --->2-export PATH="paththatfolder:$PATH"
+- --->3-write cd and come to home dir--->next refresh bashrc-->. .bashrc or source ~/.bashrc
+
+## حالا بریم سراغه مثالمون فکر کنید در کاربر arian و در پوشه bin در مسیر خانگی اون فایل هایه اجرایی است و ما میخواهیم در root به اون دسترستی داشته باشم و متغیر PATH درون root اون پوشه رو بزاره در مسیر جستجو برایه فایه هایه اجرایی:
+- 1-in root--->nano ~/.bashrc--->alt+/
+- 2-in root at lastline--->export PATH="/home/arian/bin:$PATH"
+- 3-in home dir in root write-->. .bashrc
