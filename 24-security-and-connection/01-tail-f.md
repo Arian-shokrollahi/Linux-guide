@@ -32,3 +32,7 @@ Aug 28 16:10:05 ubuntu-server sshd[4521]: Failed password for invalid user admin
 - 2- اگر دستور sudo رو اشتباه بزنید نشون 
 - و خیلی کارهایه دیگه هم میکنند 
 - کلا باید این رو بزارید در یه ترمینال باشه تا لحظه ای چک کنید
+- و جدا کردن خطه مد نظرتون از اخر فایل tail -f /var/log/auth.log
+```bash
+tail -f -n (number line of last ../auth.log you want) /var/log/auth.log
+```
