@@ -8,6 +8,6 @@ ls, cp, mv, cat, bash, sh, kill
 ```
 - نکته تکمیلی:در توزیع هایه مدرن(Ubuntu, Debian, Arch)این پوشه فایل فیزیکی جداگانه ندارد، بلکه symlink(شورت کاتی)بهuser/bin/ است که به این فرایند Usrmerge گویند
 
- <p align=center>
-	<img src="images/bin" alt"" width=500>
+<p align=center>
+	<img src="images/bin.png" alt"" width=500>
 </p>
