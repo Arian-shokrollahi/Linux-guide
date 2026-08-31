@@ -39,6 +39,7 @@ ln -s original.txt soft_link.txt
 
 # ساخت Hard Link (هاردلینک)
 ln original.txt hard_link.txt
+```
 ---
 ۲. بررسی ساختار Inode با دستور ls -li
 ```bash
