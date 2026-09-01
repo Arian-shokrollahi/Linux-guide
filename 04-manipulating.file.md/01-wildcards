@@ -65,3 +65,33 @@ echo {A..Z}
   # چاپ تمام حروف الفبای بزرگ
 
 ```
+# وایلد کارد محبوب من 
+- rm -rf !(x\|b\|a)
+- اینه که میگه جز اینا همه پاک شن
+- برای فعال شدن
+```bash
+for disable
+-->shopt -u extglob
+for enable extglo
+-->$shopt -s extglob
+
+=======================
+enable
+
+touch a  b c 
+ls --> a b c
+rm !(a|b)-->c delete
+ls a b 
+
+
+--------------
+if we don't enabled extglob
+--->
+disable
+
+shopt -u extglob
+rm !(a)
+-bash: syntax error near unexpected token `('
+
+```
+- این واید کارد خیلی مهمه چون میتونید باهاش کار هایتون رو راهت کنید مثلا اگر این نبود برای پاک شدن همه جز a باید همه رو پاک میکردید جز a و وقتتون رو میگرفت
