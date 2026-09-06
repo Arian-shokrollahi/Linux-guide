@@ -1,6 +1,5 @@
 # 8-qoute removal
 ---
-# اQuote Removal در Bash Linux
 
 ## ا-Quote Removal چیست؟
 
