@@ -1,6 +1,5 @@
 # 5-arithmetic expansion
 ---
-# ا-Arithmetic Expansion در Bash Linux
 
 ## ا-Arithmetic Expansion چیست؟
 
