@@ -47,27 +47,27 @@
 
 1.ا- Permission چیست و چرا در لینوکس اهمیت دارد؟
     
-2. مفهوم `r`, `w`, `x`
+2.ا مفهوم `r`, `w`, `x`
     
-3. تفاوت `User`, `Group`, `Others`
+3.ا تفاوت `User`, `Group`, `Others`
     
-4. نحوه خواندن Permissionها با `ls -l`
+4.ا نحوه خواندن Permissionها با `ls -l`
     
-5. تغییر Permission با `chmod`
+5.ا تغییر Permission با `chmod`
     
-6. روش Symbolic و Numeric در `chmod`
+6.ا روش Symbolic و Numeric در `chmod`
     
-7. مفهوم Owner و Group
+7.ا مفهوم Owner و Group
     
-8. تغییر مالک با `chown`
+8.ا تغییر مالک با `chown`
     
-9. تغییر Group با `chgrp`
+9.ا تغییر Group با `chgrp`
     
-10. ا-Permissionهای دایرکتوری‌ها
+10.ا ا-Permissionهای دایرکتوری‌ها
     
-11. مفهوم `umask`
+11.ا مفهوم `umask`
     
-12. ا-Permissionهای ویژه:
+12.ا ا-Permissionهای ویژه:
     
     - ا-`SUID`
         
@@ -75,13 +75,13 @@
         
     - ا-`Sticky Bit`
         
-13. مفهوم `ACL`
+13.ا مفهوم `ACL`
     
-14. تفاوت Permissionهای معمولی با ACL
+14.ا تفاوت Permissionهای معمولی با ACL
     
-15. بررسی و Troubleshooting مشکلات دسترسی
+15.ا بررسی و Troubleshooting مشکلات دسترسی
     
-16. نکات امنیتی مربوط به Permissionها
+16.ا نکات امنیتی مربوط به Permissionها
     
 
 در نهایت هدف این بخش فقط حفظ کردن دستورهایی مثل `chmod` و `chown` نیست؛ بلکه باید بتوانیم **Permission یک فایل را بخوانیم، رفتار آن را پیش‌بینی کنیم و در صورت نیاز به‌درستی تغییرش دهیم.**
