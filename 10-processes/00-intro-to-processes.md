@@ -4,13 +4,13 @@
 
 قبل از اینکه وارد مباحثی مثل مدیریت Processها، مشاهده وضعیت آن‌ها، ارسال Signal، Scheduling یا مباحث پیشرفته‌تر شویم، باید اول بفهمیم که **Process دقیقاً چیست و لینوکس چگونه آن را مدیریت می‌کند.**
 
-Process یکی از بنیادی‌ترین مفاهیم در Linux است. تقریباً هر چیزی که در سیستم در حال اجراست، از یک دستور ساده در Terminal گرفته تا یک System Service، در نهایت به شکل یک Process اجرا می‌شود.
+ا- Process یکی از بنیادی‌ترین مفاهیم در Linux است. تقریباً هر چیزی که در سیستم در حال اجراست، از یک دستور ساده در Terminal گرفته تا یک System Service، در نهایت به شکل یک Process اجرا می‌شود.
 
 ---
 
-## 1. Process چیست؟
+## 1. ا-Process چیست؟
 
-**Process یا فرایند، یک نمونه در حال اجرای یک Program است.**
+ا-**Process یا فرایند، یک نمونه در حال اجرای یک Program است.**
 
 برای درک بهتر، ابتدا باید تفاوت Program و Process را بدانیم.
 
@@ -32,8 +32,8 @@ python3 script.py
 
 به زبان ساده:
 
-> **Program = دستورالعمل‌هایی که روی دیسک ذخیره شده‌اند**  
-> **Process = همان دستورالعمل‌ها در حال اجرا**
+> ا-**Program = دستورالعمل‌هایی که روی دیسک ذخیره شده‌اند**  
+> ا-**Process = همان دستورالعمل‌ها در حال اجرا**
 
 یک Process فقط شامل کد برنامه نیست، بلکه اطلاعات مختلفی را نیز در خود دارد، از جمله:
 
@@ -45,11 +45,11 @@ python3 script.py
     
 - وضعیت اجرای CPU
     
-- File Descriptorها
+- ا-File Descriptorها
     
-- Environment Variableها
+- ا-Environment Variableها
     
-- User و Group مربوط به Process
+- ا-User و Group مربوط به Process
     
 - اطلاعات مربوط به Process Group
     
@@ -68,7 +68,7 @@ python3 script.py
 
 دستور پخت می‌تواند روی کاغذ وجود داشته باشد، بدون اینکه کسی در حال استفاده از آن باشد.
 
-Program هم می‌تواند روی Disk وجود داشته باشد، بدون اینکه در حال اجرا باشد.
+ا-Program هم می‌تواند روی Disk وجود داشته باشد، بدون اینکه در حال اجرا باشد.
 
 مثلاً:
 
@@ -84,7 +84,7 @@ Program هم می‌تواند روی Disk وجود داشته باشد، بدو
 sleep 100
 ```
 
-Linux یک Process ایجاد می‌کند تا این Program را اجرا کند.
+ا-Linux یک Process ایجاد می‌کند تا این Program را اجرا کند.
 
 حتی می‌توانیم یک Program را چندین بار اجرا کنیم:
 
@@ -112,15 +112,15 @@ Program
 
 ---
 
-# 3. PID چیست؟
+# 3. ا-PID چیست؟
 
 هر Process در Linux یک شناسه دارد که به آن:
 
-**PID = Process ID**
+ا-**PID = Process ID**
 
 گفته می‌شود.
 
-PID یک عدد است که Kernel از آن برای شناسایی یک Process استفاده می‌کند.
+ا-PID یک عدد است که Kernel از آن برای شناسایی یک Process استفاده می‌کند.
 
 مثلاً:
 
@@ -163,7 +163,7 @@ PID 1200  → bash
 PID 1450  → sleep
 ```
 
-PID بسیار مهم است، چون بسیاری از ابزارهای Linux برای کار کردن روی یک Process مشخص، از PID آن استفاده می‌کنند.
+ا-PID بسیار مهم است، چون بسیاری از ابزارهای Linux برای کار کردن روی یک Process مشخص، از PID آن استفاده می‌کنند.
 
 مثلاً:
 
@@ -177,19 +177,19 @@ kill 1450
 
 ---
 
-# 4. PPID چیست؟
+# 4. ا-PPID چیست؟
 
-Processها معمولاً به صورت مستقل و بدون ارتباط با Processهای دیگر ایجاد نمی‌شوند.
+ا-Processها معمولاً به صورت مستقل و بدون ارتباط با Processهای دیگر ایجاد نمی‌شوند.
 
 اغلب یک Process توسط Process دیگری ایجاد می‌شود.
 
-Processی که Process دیگری را ایجاد می‌کند، **Parent Process** نام دارد.
+ا-Processی که Process دیگری را ایجاد می‌کند، **Parent Process** نام دارد.
 
-Process ایجادشده نیز **Child Process** نام دارد.
+ا-Process ایجادشده نیز **Child Process** نام دارد.
 
 هر Process یک مقدار به نام:
 
-**PPID = Parent Process ID**
+ا-**PPID = Parent Process ID**
 
 دارد که PID مربوط به Parent آن Process است.
 
@@ -246,7 +246,7 @@ systemd
 
 ---
 
-# 5. Parent و Child Process
+# 5. ا-Parent و Child Process
 
 حالا که PID و PPID را می‌شناسیم، مفهوم **Parent / Child** راحت‌تر می‌شود.
 
@@ -258,7 +258,7 @@ Parent
    └── Child
 ```
 
-Process بالایی Parent و Process پایینی Child است.
+ا-Process بالایی Parent و Process پایینی Child است.
 
 مثلاً Shell خودمان را در نظر بگیریم:
 
@@ -272,7 +272,7 @@ bash
 ls
 ```
 
-Shell می‌تواند Process مربوط به `ls` را ایجاد کند.
+ا-Shell می‌تواند Process مربوط به `ls` را ایجاد کند.
 
 در نتیجه به صورت مفهومی داریم:
 
@@ -315,13 +315,13 @@ bash
 
 ---
 
-# 6. Process Tree چیست؟
+# 6. ا-Process Tree چیست؟
 
 از آنجا که Processها می‌توانند Processهای دیگری ایجاد کنند، بین آن‌ها یک ساختار سلسله‌مراتبی به وجود می‌آید.
 
 به این ساختار:
 
-**Process Tree**
+ا-**Process Tree**
 
 گفته می‌شود.
 
@@ -344,13 +344,13 @@ systemd
 
 در این ساختار:
 
-- `systemd` در بالاترین سطح قرار دارد.
+- ا-`systemd` در بالاترین سطح قرار دارد.
     
-- `sshd` یک Child از `systemd` است.
+- ا-`sshd` یک Child از `systemd` است.
     
-- `bash` یک Child از `sshd` است.
+- ا-`bash` یک Child از `sshd` است.
     
-- `python` یک Child از `bash` است.
+- ا-`python` یک Child از `bash` است.
     
 
 می‌توانیم این ساختار را با دستور زیر مشاهده کنیم:
@@ -383,7 +383,7 @@ systemd
 
 ---
 
-# 7. Init و systemd
+# 7. ا-Init و systemd
 
 حالا یک سؤال مهم داریم:
 
@@ -443,9 +443,9 @@ systemd
 
 نکته مهم این است که:
 
-> **PID 1 ریشه Processهای User Space است و نقش بسیار مهمی در Startup و مدیریت سیستم دارد.**
+> ا-**PID 1 ریشه Processهای User Space است و نقش بسیار مهمی در Startup و مدیریت سیستم دارد.**
 
-`systemd` مسئولیت‌هایی مانند موارد زیر را بر عهده دارد:
+ا-`systemd` مسئولیت‌هایی مانند موارد زیر را بر عهده دارد:
 
 - راه‌اندازی Serviceها
     
@@ -457,7 +457,7 @@ systemd
     
 - کمک به Shutdown سیستم
     
-- Adopt کردن برخی Orphan Processها
+- ا-Adopt کردن برخی Orphan Processها
     
 
 پس وقتی در Linux می‌بینیم:
@@ -468,19 +468,19 @@ PID 1
 
 باید سریع به یاد بیاوریم:
 
-> **Root of the User-Space Process Hierarchy**
+> ا-**Root of the User-Space Process Hierarchy**
 
 ---
 
-# 8. PID و PGID
+# 8. ا-PID و PGID
 
 هر Process فقط یک PID ندارد.
 
-Linux Processها را در **Process Group** نیز سازمان‌دهی می‌کند.
+ا-Linux Processها را در **Process Group** نیز سازمان‌دهی می‌کند.
 
 هر Process Group دارای یک شناسه به نام:
 
-**PGID = Process Group ID**
+ا-**PGID = Process Group ID**
 
 است.
 
@@ -525,7 +525,7 @@ grep
 sort
 ```
 
-Shell می‌تواند این Processهای مرتبط را در یک Process Group قرار دهد.
+ا-Shell می‌تواند این Processهای مرتبط را در یک Process Group قرار دهد.
 
 برای مشاهده PID، PPID و PGID می‌توانیم بنویسیم:
 
@@ -563,9 +563,9 @@ PID 1202
 
 ---
 
-# 9. User ID و Group ID یک Process
+# 9. ا-User ID و Group ID یک Process
 
-Linux باید بداند که:
+ا-Linux باید بداند که:
 
 > **این Process متعلق به چه User و چه Groupی است؟**
 
@@ -734,9 +734,9 @@ kill
 
 مهم‌ترین چیزی که باید از این مقدمه یاد بگیری این است:
 
-> **Process فقط یک Program در حال اجرا نیست.**
+> ا-**Process فقط یک Program در حال اجرا نیست.**
 > 
-> Process یک موجودیت قابل مدیریت توسط Linux Kernel است که **هویت (PID)، والد (PPID)، گروه (PGID)، User و Group (UID/GID)، حافظه، منابع و وضعیت اجرای خودش** را دارد و در یک ساختار سلسله‌مراتبی به نام **Process Tree** قرار می‌گیرد.
+> ا-Process یک موجودیت قابل مدیریت توسط Linux Kernel است که **هویت (PID)، والد (PPID)، گروه (PGID)، User و Group (UID/GID)، حافظه، منابع و وضعیت اجرای خودش** را دارد و در یک ساختار سلسله‌مراتبی به نام **Process Tree** قرار می‌گیرد.
 
 وقتی این مفاهیم را به خوبی درک کردی، آماده‌ایم برویم سراغ مباحث مهم‌تر مثل:
 
