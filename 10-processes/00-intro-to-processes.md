@@ -761,3 +761,68 @@ Process Management
 ```
 
 این‌ها بخش‌هایی هستند که درک درست همین مفاهیم پایه، یادگیری‌شان را بسیار ساده‌تر می‌کند.
+## اگر دستور htop رو بلد باشیم همه پردازه هارو بلدیم
+**اگر `htop` رو خیلی خوب بلد باشی، به این معنی نیست که کل مبحث Processها رو بلدی**؛ ولی بخش بزرگی از **کار عملی و روزمره** رو پوشش می‌ده.
+
+بهتره این‌طوری نگاه کنی:
+
+```
+                 Linux Processes
+                       │
+        ┌──────────────┼──────────────┐
+        │              │              │
+     مشاهده          کنترل          درک داخلی
+        │              │              │
+       htop         kill/signals     /proc
+       ps           jobs/bg/fg       states
+       top          nice/renice      scheduling
+       pstree                       threads
+```
+
+### اگر `htop` رو حرفه‌ای بلد باشی، این‌ها رو خوب انجام می‌دی:
+
+- پیدا کردن Processها
+- دیدن PID و User
+- فهم CPU و Memory usage
+- Sort کردن Processها
+- Search و Filter
+- دیدن Parent/Child با Tree
+- تشخیص `R`, `S`, `D`, `T`, `Z`
+- Kill کردن Process با Signal
+- فهم اولیه Priority و Nice
+- مانیتورینگ Real-time
+- پیدا کردن Process مشکل‌دار
+
+اما هنوز باید این‌ها رو **جداگانه** یاد بگیری:
+
+```
+ps                  ← بررسی و scripting
+kill / signals      ← SIGTERM, SIGKILL, SIGHUP, ...
+jobs/bg/fg          ← Job Control
+nice/renice         ← CPU scheduling priority
+pstree              ← Process hierarchy
+/proc               ← اطلاعات عمیق Kernel درباره Process
+systemd             ← مدیریت Serviceها
+threads             ← Thread vs Process
+scheduling          ← نحوه زمان‌بندی CPU
+process states      ← درک عمیق‌تر stateها
+zombie/orphan       ← lifecycle
+```
+
+### پس یک معیار خوب:
+
+اگر منظورت **کار عملی Linux Admin** باشه:
+
+> `ا-htop` رو حرفه‌ای بلد باشی = حدوداً **بخش مهمی از کار روزمره با Processها** رو بلدی.
+
+ولی اگر هدفت اینه که بگی:
+
+> «من مبحث Process در Linux رو کامل بلدم»
+
+اون‌وقت `htop` **فقط یکی از ابزارهاست**.
+
+اتفاقاً پیشنهاد من اینه که همین مسیری که داری می‌ری رو ادامه بدی:
+
+**اول `ps` → بعد `htop` → بعد `kill/signals` → بعد `jobs` → بعد `/proc`**
+
+چون این ترتیب باعث می‌شه فقط حفظ نکنی، بلکه واقعاً بفهمی Process در Linux چطور کار می‌کنه.
