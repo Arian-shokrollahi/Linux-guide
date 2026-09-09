@@ -30,3 +30,89 @@
 **Process → PID → Process State → Process Tree → Signal → `kill` → SIGTERM → SIGKILL → SIGSTOP/SIGCONT → `ps`/`htop` → nice/renice → jobs/fg/bg → systemd**
 
 اگر این مسیر رو بلد باشی، بخش **Process Management در Linux** رو در حد خوبی برای کارهای Administration پوشش دادی.
+# دستور هایی که باید برایه قسمت process managment بلد باشید.
+### 🟢 سطح پایه — حتماً بلد باش
+
+|Command|کاربرد|
+|---|---|
+|`ps`|نمایش Processها|
+|`ps aux`|نمایش تقریباً تمام Processها|
+|`ps -ef`|نمایش Processها با جزئیات|
+|`top`|مانیتور لحظه‌ای Processها|
+|`htop`|نسخه interactive و راحت‌تر `top`|
+|`pgrep`|پیدا کردن PID بر اساس نام Process|
+|`pidof`|پیدا کردن PID یک برنامه|
+|`kill`|ارسال Signal به یک Process|
+|`pkill`|ارسال Signal بر اساس نام/ویژگی Process|
+
+### 🟡 سطح متوسط — خیلی مهم
+
+|Command|کاربرد|
+|---|---|
+|`kill -l`|نمایش لیست Signalها|
+|`kill -15 PID`|ارسال `SIGTERM`|
+|`kill -9 PID`|ارسال `SIGKILL`|
+|`kill -STOP PID`|متوقف کردن Process|
+|`kill -CONT PID`|ادامه دادن Process|
+|`pkill -SIGTERM name`|ارسال Signal بر اساس نام|
+|`pgrep -a name`|پیدا کردن PID + command|
+|`pstree`|نمایش Processها به شکل Tree|
+|`renice`|تغییر Priority یک Process|
+|`nice`|اجرای برنامه با Priority مشخص|
+
+### 🔵 مدیریت Foreground / Background
+
+این‌ها هم برای Process Management مهم‌اند:
+
+|Command|کاربرد|
+|---|---|
+|`command &`|اجرای Process در Background|
+|`jobs`|نمایش Jobهای Shell|
+|`fg`|آوردن Job به Foreground|
+|`bg`|ادامه دادن Job در Background|
+|`Ctrl+C`|ارسال `SIGINT`|
+|`Ctrl+Z`|ارسال `SIGTSTP`|
+
+### 🔴 چند دستور پیشرفته‌تر
+
+|Command|کاربرد|
+|---|---|
+|`wait`|منتظر ماندن برای پایان Process|
+|`nohup`|ادامه اجرای برنامه بعد از Logout|
+|`timeout`|اجرای Process برای مدت مشخص|
+|`strace`|مشاهده System Callهای Process|
+|`lsof`|دیدن File/Socketهای مورد استفاده Process|
+
+### ⭐ اگر بخوام برای یادگیری اولویت‌بندی کنم:
+
+**Must Know:**
+
+```
+ps
+top
+htop
+pgrep
+pidof
+kill
+pkill
+pstree
+nice
+renice
+jobs
+fg
+bg
+```
+
+**Signalهایی که حتماً باید بلد باشی:**
+
+```
+SIGTERM  → 15
+SIGKILL  → 9
+SIGINT   → 2
+SIGSTOP  → 19
+SIGCONT  → 18
+SIGHUP   → 1
+SIGTSTP  → 20
+```
+
+و مهم‌تر از حفظ کردن شماره‌ها اینه که بدونی **چه زمانی از هر Signal استفاده کنی**؛ مخصوصاً تفاوت `SIGTERM` و `SIGKILL`.
