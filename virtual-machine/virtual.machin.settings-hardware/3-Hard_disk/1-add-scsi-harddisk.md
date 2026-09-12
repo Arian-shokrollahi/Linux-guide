@@ -1,10 +1,10 @@
 
 <p align="center">
-	<img src="../hardware-image/hw-harddisk1-.png" alt="img" width=500>
+	<img src="../hardware-image/hw-harddisk-1.png" alt="img" width=500>
 </p>
 
 <p align="center">
-	<img src="../hardware-image/hw-harddisk-.2png" alt="img" width=500>
+	<img src="../hardware-image/hw-harddisk-2.png" alt="img" width=500>
 </p>
 
 <p align="center">
