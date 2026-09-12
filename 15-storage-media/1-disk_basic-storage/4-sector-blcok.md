@@ -1,250 +1,461 @@
-1) Sector چیست؟
+## 1. اول از همه: Sector چیست؟
 
-Sector کوچک‌ترین واحد فیزیکی ذخیره‌سازی روی یک Disk است.
+ا-**Sector کوچک‌ترین واحد آدرس‌دهی/انتقال داده در سطح Storage Device است.**
 
-یعنی HDD یا SSD اطلاعات را در کوچک‌ترین قسمت‌هایی ذخیره می‌کند که به آن‌ها Sector می‌گوییم.
+یعنی وقتی Linux با یک Disk مثل `/dev/sda` یا `/dev/nvme0n1` کار می‌کند، دیسک از تعداد زیادی واحد کوچک به نام **sector** تشکیل شده است.
 
-مثال ساده:
+به‌صورت سنتی:
 
+```
+1 Sector = 512 bytes
+```
+
+اما امروزه Storageهای زیادی **4 KiB sector** دارند یا ممکن است 4K را به‌صورت physical sector داشته باشند و برای سازگاری، **512-byte logical sectors** به سیستم‌عامل ارائه کنند.
+
+مثلاً یک Disk فرضی:
+
+```
 Disk
- |
- +-- Sector 0
- +-- Sector 1
- +-- Sector 2
- +-- Sector 3
- ...
+│
+├── Sector 0
+├── Sector 1
+├── Sector 2
+├── Sector 3
+├── ...
+└── Sector N
+```
 
-هر Sector یک شماره دارد که به آن Sector Address می‌گویند.
+پس اگر Sector برابر 512 bytes باشد:
 
-سیستم می‌تواند بگوید:
+```
+1000 sectors × 512 bytes
+= 512000 bytes
+```
 
-Sector شماره 1000 را بخوان
+### نکته مهم
 
-و Controller دیسک آن قسمت را پیدا می‌کند.
+ا-Sector بیشتر یک مفهوم **Storage Device / Block Layer** است.
 
-2) اندازه Sector چقدر است؟
+یعنی در این سطح هنوز درباره‌ی فایل‌هایی مثل:
 
-در دیسک‌های امروزی معمولاً:
+```
+/home/user/file.txt
+```
 
-نوع Sector	اندازه
-Traditional Sector	512 Bytes
-Advanced Format Sector	4096 Bytes (4K)
+صحبت نمی‌کنیم.
+
+---
+
+# 2. حالا Block چیست؟
+
+اینجا یک نکته‌ی خیلی مهم وجود دارد:
+
+> ا-**Block با Sector یکی نیست.**
+
+در Linux، مخصوصاً وقتی وارد **Filesystem** می‌شویم، داده‌ها معمولاً در واحدهایی به نام **filesystem block** مدیریت می‌شوند.
+مثلاً در `ext4`، اندازه‌ی block معمولاً:
+
+```
+4 KiB
+```
+
+است. Kernel documentation هم توضیح می‌دهد که ext4 فضای Storage را در واحدهایی به نام block مدیریت می‌کند و block size هنگام ساخت filesystem تعیین می‌شود؛ مقادیر رایج شامل 1 KiB، 2 KiB و 4 KiB هستند.
+
+پس فرض کن:
+
+```
+Sector = 512 bytes
+Block  = 4096 bytes
+```
+
+در این حالت:
+
+```
+4096 / 512 = 8
+```
 
 یعنی:
 
-1 Sector = 512 Bytes
+```
+1 Filesystem Block
+        ↓
+8 Sectors
+```
 
-یا:
+مثلاً:
 
-1 Sector = 4 KB
+```
+Block 0
+┌──────┬──────┬──────┬──────┬──────┬──────┬──────┬──────┐
+│Sec 0 │Sec 1 │Sec 2 │Sec 3 │Sec 4 │Sec 5 │Sec 6 │Sec 7 │
+└──────┴──────┴──────┴──────┴──────┴──────┴──────┴──────┘
+                    4096 bytes
+```
 
-مثلاً اگر یک HDD یک ترابایتی داشته باشیم:
+---
 
-1TB Disk
- |
- +-- میلیون‌ها Sector
-3) Block چیست؟
+# 3. پس Sector و Block چه تفاوتی دارند؟
 
-Block یک واحد منطقی است که سیستم‌عامل برای کار با Storage استفاده می‌کند.
+اینجا دقیقاً جایی است که خیلی‌ها اشتباه می‌کنند.
 
-یعنی:
+### Sector
 
-Sector → توسط سخت‌افزار (Disk) مدیریت می‌شود.
-Block → توسط سیستم‌عامل و Filesystem مدیریت می‌شود.
+بیشتر مربوط به:
 
-ساختار:
-
-Physical Disk
-
+```
+Storage Device
+        ↓
+Block Layer
+        ↓
 Sector
-Sector
-Sector
-Sector
-   |
-   |
-   v
+```
 
+است.
+
+### Block
+
+بیشتر در زمینه‌ی:
+
+```
 Filesystem
-
-Block
-Block
-Block
-4) رابطه Sector و Block
-
-Block معمولاً از چند Sector ساخته می‌شود.
-
-مثال:
-
-فرض کنیم:
-
-هر Sector = 512 Bytes
-
-و Filesystem:
-
-Block Size = 4096 Bytes
-
-پس:
-
-1 Block = 8 Sector
-
-چون:
-
-512 × 8 = 4096 Bytes
-
-تصویر:
-
-Block 1
-
-+---------+---------+---------+---------+
-|Sector 1 |Sector 2 |Sector 3 |Sector 4 |
-+---------+---------+---------+---------+
-
-+---------+---------+---------+---------+
-|Sector 5 |Sector 6 |Sector 7 |Sector 8 |
-+---------+---------+---------+---------+
-
-= 4096 Bytes
-5) تفاوت Sector و Block
-ویژگی	Sector	Block
-مدیریت توسط	Hardware	Operating System / Filesystem
-واحد فیزیکی	بله	خیر
-اندازه	معمولاً 512B یا 4KB	معمولاً 4KB یا بیشتر
-مثال	قسمت واقعی روی Disk	واحد ذخیره فایل
-قابل تغییر	تقریباً ثابت	توسط Filesystem تعیین می‌شود
-6) مثال با فایل
-
-فرض کنیم یک فایل داریم:
-
-file.txt
-
-حجم:
-
-10 KB
-
-Filesystem با Blockهای 4KB کار می‌کند:
-
-Block size = 4KB
-
-پس:
-
-10KB ÷ 4KB = 2.5
-
-چون نمی‌شود نصف Block استفاده کرد:
-
-File نیاز دارد:
-
-Block 1 → 4KB
-Block 2 → 4KB
-Block 3 → 4KB
-
-در نتیجه:
-
-10KB File
-
-استفاده واقعی روی Disk:
-
-12KB
-
-این به آن می‌گویند:
-
-Internal Fragmentation
-
-7) در لینوکس چطور Block Size را ببینیم؟
-
-برای Filesystem:
-
-stat file.txt
-
-مثلاً:
-
-IO Block: 4096
-
-یعنی:
-
-Filesystem Block Size = 4096 Bytes
-
-یا:
-
-tune2fs -l /dev/sda1
-
-برای ext filesystem:
-
-Block size: 4096
-8) چرا دانستن Sector و Block مهم است؟
-
-برای Linux Admin مهم است چون در این موضوعات استفاده می‌شود:
-
-1. Partitioning
-
-Partitionها بر اساس Sector ساخته می‌شوند.
-
-مثلاً:
-
-/dev/sda1
-
-Start Sector: 2048
-End Sector: 500000
-2. Performance
-
-اگر Partition روی Sector مناسب شروع نشود:
-
-Misaligned Partition
-
-باعث کاهش Performance می‌شود.
-
-3. Filesystem
-
-Filesystemهایی مثل:
-
-ext4
-XFS
-Btrfs
-
-با Block کار می‌کنند.
-
-4. Storage Troubleshooting
-
-وقتی مشکل Disk داری باید بدانی:
-
-Application
-      |
-      v
+        ↓
 Filesystem Block
-      |
-      v
-Disk Sector
-      |
-      v
+```
+
+مطرح می‌شود.
+
+بنابراین مثلاً `ext4` می‌تواند بگوید:
+
+```
+من داده‌ها را در blockهای 4 KiB مدیریت می‌کنم.
+```
+
+درحالی‌که Disk ممکن است:
+
+```
+Logical Sector = 512 bytes
+Physical Sector = 4096 bytes
+```
+
+داشته باشد. Linux حتی اطلاعات مربوط به logical/physical block size و alignment را در `/sys/block/...` در اختیار قرار می‌دهد.
+
+---
+
+# 4. حالا یک مثال واقعی‌تر
+
+فرض کنیم این Disk را داریم:
+
+```
+/dev/sda
+```
+
+و فرض کنیم:
+
+```
+Sector size = 512 bytes
+Filesystem block size = 4096 bytes
+```
+
+ساختار مفهومی می‌شود:
+
+```
+/dev/sda
+│
+├── Sector 0
+├── Sector 1
+├── Sector 2
+├── Sector 3
+├── Sector 4
+├── Sector 5
+├── Sector 6
+├── Sector 7
+│       └── Filesystem Block 0
+│
+├── Sector 8
+├── Sector 9
+├── Sector 10
+├── Sector 11
+├── Sector 12
+├── Sector 13
+├── Sector 14
+├── Sector 15
+│       └── Filesystem Block 1
+│
+└── ...
+```
+
+پس:
+
+```
+8 sectors = 1 filesystem block
+```
+
+---
+
+# 5. یک جدول مهم
+
+|مفهوم|معمولاً مربوط به|مثال|اندازه|
+|---|---|---|---|
+|**Disk**|Storage Device|`/dev/sda`|مثلاً 1 TB|
+|**Partition**|تقسیم‌بندی Disk|`/dev/sda1`|مثلاً 100 GB|
+|**Sector**|Storage / Block Layer|Sector 0, 1, 2...|512 B یا 4 KiB|
+|**Filesystem Block**|Filesystem|ext4 block|معمولاً 4 KiB|
+|**File**|Filesystem|`test.txt`|مثلاً 10 KB|
+|**Block Group**|بعضی Filesystemها مثل ext4|Block Group|مجموعه‌ای از blocks|
+
+نکته: **Block size متعلق به filesystem است و لزوماً برابر sector size نیست.** مثلاً ext4 معمولاً با blockهای 4 KiB کار می‌کند.
+
+---
+
+# 6. یک نکته بسیار مهم: Block Device
+
+در Linux اصطلاح دیگری هم می‌بینی:
+
+```
+Block Device
+```
+
+مثلاً:
+
+```
+ls -l /dev/sda
+ls -l /dev/nvme0n1
+ls -l /dev/sda1
+```
+
+این‌ها **block device** هستند.
+
+یعنی Deviceای که Linux می‌تواند داده‌های آن را به‌صورت block-oriented مدیریت کند.
+
+مثلاً:
+
+```
+/dev/sda
+```
+
+کل Disk است.
+
+```
+/dev/sda1
+```
+
+یک Partition از آن Disk است.
+
+```
+/dev/nvme0n1
+```
+
+یک NVMe Disk است.
+
+```
+/dev/nvme0n1p1
+```
+
+یک Partition از آن NVMe Disk است.
+
+---
+
+# 7. رابطه‌ی همه‌ی این‌ها با هم
+
+برای اینکه تصویر ذهنی کاملی داشته باشی:
+
+```
 Physical Storage
-خلاصه نهایی
-Physical Disk
-      |
-      v
+       │
+       ▼
+     Disk
+       │
+       ▼
+    Sectors
+       │
+       ▼
+   Partition
+       │
+       ▼
+   Filesystem
+       │
+       ▼
+Filesystem Blocks
+       │
+       ▼
+     Files
+       │
+       ▼
+     Data
+```
+
+البته از نظر معماری دقیق، filesystem مستقیماً روی partition یا block device قرار می‌گیرد و خودش blockهای منطقی filesystem را مدیریت می‌کند؛ این نمودار بیشتر برای ساختن **مدل ذهنی** است.
+
+---
+
+# 8. چرا اصلاً Block مهم است؟
+
+فرض کن فایل داری:
+
+```
+file.txt
+```
+
+و اندازه‌ی آن:
+
+```
+100 bytes
+```
+
+ولی filesystem block size این است:
+
+```
+4096 bytes
+```
+
+ا-Filesystem نمی‌آید الزاماً یک block 100-byte بسازد.
+
+بلکه یک block filesystem در اختیار فایل قرار می‌دهد:
+
+```
+4096 bytes
+```
+
+و فایل فقط:
+
+```
+100 bytes
+```
+
+از آن را استفاده می‌کند.
+
+این یکی از دلایلی است که **File Size** و **Disk Usage** می‌توانند متفاوت باشند.
+
+مثلاً:
+
+```
+ls -l file.txt
+```
+
+ممکن است بگوید:
+
+```
+100 bytes
+```
+
+ولی:
+
+```
+du -h file.txt
+```
+
+ممکن است مثلاً نشان دهد:
+
+```
+4.0K
+```
+
+چون filesystem فضای Storage را در blockها مدیریت می‌کند.
+
+---
+
+# 9. یک نکته مهم درباره‌ی 4K
+
+اینجا سه مفهوم را قاطی نکن:
+
+```
+Logical Sector Size
+Physical Sector Size
+Filesystem Block Size
+```
+
+مثلاً ممکن است داشته باشیم:
+
+```
+Logical Sector = 512 B
+Physical Sector = 4096 B
+Filesystem Block = 4096 B
+```
+
+یا در بعضی Storageها:
+
+```
+Logical Sector = 4096 B
+Physical Sector = 4096 B
+Filesystem Block = 4096 B
+```
+
+این تفاوت‌ها برای **alignment و performance** مهم هستند. Linux اطلاعات topology و alignment دستگاه را در sysfs در اختیار ابزارها قرار می‌دهد.
+
+---
+
+# 10. یک مثال نهایی که همه‌چیز را کنار هم می‌گذارد
+
+فرض کن:
+
+```
+Disk = 1 TB
+Logical Sector = 512 B
+Physical Sector = 4096 B
+Filesystem = ext4
+Filesystem Block = 4096 B
+```
+
+پس:
+
+```
+1 Physical Sector
+       =
+8 Logical Sectors
+       =
+1 Filesystem Block
+```
+
+و مثلاً:
+
+```
+Disk
+│
+├── Partition 1
+│      │
+│      └── ext4
+│             │
+│             ├── Block 0
+│             ├── Block 1
+│             ├── Block 2
+│             ├── Block 3
+│             └── ...
+│
+└── Partition 2
+       │
+       └── ...
+```
+
+در لایه‌ی پایین‌تر، هر filesystem block از تعدادی sector تشکیل می‌شود.
+
+---
+
+# جمع‌بندی
+
+اگر بخواهم **نکات مهمی که باید برای Linux بلد باشی** را جدا کنم:
+
+1. **Sector** واحدی در سطح Storage/Block Layer است.
+2. اندازه‌ی سنتی sector برابر **512 bytes** بوده، ولی **4 KiB** نیز رایج است.
+3. **Filesystem Block با Sector یکی نیست.**
+4. Filesystemهایی مثل `ext4` معمولاً از **4 KiB blocks** استفاده می‌کنند.
+5. ممکن است چند Sector داخل یک Filesystem Block قرار بگیرد.
+6. **Logical Sector** و **Physical Sector** ممکن است اندازه‌ی متفاوتی داشته باشند.
+7. **Partition** بخشی از Disk است؛ Block نیست.
+8. `/dev/sda`، `/dev/sda1` و `/dev/nvme0n1` نمونه‌هایی از **block devices** هستند.
+9. برای Linux Storage باید این زنجیره را خوب بفهمی:
+
+```
+Disk
+ ↓
 Sector
-(کوچک‌ترین واحد فیزیکی ذخیره‌سازی)
-
-      |
-      v
-
-Block
-(واحد منطقی Filesystem)
-
-      |
-      v
-
+ ↓
+Partition
+ ↓
+Filesystem
+ ↓
+Filesystem Block
+ ↓
 File
-
-به زبان خیلی ساده:
-
-Sector = کوچک‌ترین قسمت واقعی روی دیسک
-Block = چند Sector که سیستم‌عامل به عنوان یک واحد مدیریت می‌کند
-
-مثال:
-
-1 Sector = 512 Bytes
-
-8 Sector = 1 Block
-
-1 Block = 4096 Bytes (4KB)
-
-برای ادامه Storage در لینوکس، بعد از این مفهوم معمولاً باید بروی سراغ Filesystem و اینکه چطور Blockها را مدیریت می‌کند.
+ ↓
+Data
+```
