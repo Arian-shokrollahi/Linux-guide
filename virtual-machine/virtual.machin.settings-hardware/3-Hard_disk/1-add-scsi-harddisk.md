@@ -9,13 +9,19 @@
 <p align="center">
 	<img src="../hardware-image/hw-harddisk-1.png" alt="img" width=500>
 </p>
+
 ---
+
+
 7. میبیند مدل هایه مختلف دیسک رو نشون داده و براساس دیسکتون انتخاب کنید من SCSIرو انتخاب کردم و انتخاب کنید و next رو بزنید
 
 <p align="center">
 	<img src="../hardware-image/hw-harddisk-2.png" alt="img" width=500>
 </p>
+
 ---
+
+
 8. این توضیحات رو مد نظر داشته باشید ولی معمولا اولی رو انتخاب میکنیم
 
 ### 1) **Create a new virtual disk** ✅ (معمولاً همین را انتخاب می‌کنیم)
@@ -104,6 +110,7 @@ Linux VM
 <p align="center">
 	<img src="../hardware-image/hw-harddisk-3.png" alt="img" width=500>
 </p>
+
 ---
 9. اینم از توضیح گزینه ها
 ### **Maximum disk size**
@@ -156,6 +163,7 @@ disk.vmdk
 
 ---
 
+
 ### **Split virtual disk into multiple files**
 
 چند فایل کوچک می‌سازد:
@@ -171,6 +179,7 @@ disk-s003.vmdk
 
 ---
 
+
 ### تنظیم پیشنهادی برای تو (تمرین Linux Storage):
 
 ```
@@ -183,7 +192,9 @@ Maximum disk size: 20GB
 <p align="center">
 	<img src="../hardware-image/hw-harddisk-4.png" alt="img" width=500>
 </p>
+
 ---
+
 ### **Where would you like to store the disk file?**
 
 یعنی مسیر ذخیره شدن دیسک جدید.
@@ -231,6 +242,7 @@ D:\VMs\Ubuntu\disks\
 <p align="center">
 	<img src="../hardware-image/hw-harddisk-5.png" alt="img" width=500>
 </p>
+
 --- 
 10. حالا اگر در ماشین مجازی پایین edit virtual machine settings رو نگاه کنی نشون میده هارد دیسکی اضافه شده اولی که عدد نداره همونیه که در هنگام add virtual machine بهش سایز میدی و میگی چقد باشه و 2 میشه یکی بعد اون 3 یکی بعد دو که ساختی ....
 
