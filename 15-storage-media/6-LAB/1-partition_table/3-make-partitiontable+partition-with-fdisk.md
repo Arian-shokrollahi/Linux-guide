@@ -4,7 +4,8 @@
 - 1-میرید و lsblk میزنید و اون دیسک هاتون رو پیدا میکنید اگر از ماشین مجازی استفاده میکنید حواستون به سایز در خروجی lsblk باشد که باید به اندازه اون دیسکی که ساختید حجم داشته باشید
 - نکته: گفتیم در ماشین مجازی اولین دیسکی که در هنگام create new virtual machine میسازیم میشه sda اگر disk scsi باشد و از اون به بعد دیسک هایه scsi که میسازیم میشه به ترتبیبsdb sdc sdd.
 - 2-حالا این رو میزنید.
-'''bash
+  
+```
 1-sudo fdisk diskpath
 2-g --->for create gpt partition table
 3-n 
@@ -12,6 +13,8 @@
 5-last sector -->like -->+13G
 6-p for check partition
 7-w --->write table to disk + exit
+```
+
 ---
 
 ## مراحل:
