@@ -11,6 +11,7 @@
 	<img src="../0-lab-image/pt-1.png" alt="image" width=500>
 </p>
 ---
+
 ### با fdisk command
 
 
