@@ -256,3 +256,12 @@ ext4
    ↓
 /mnt/data/
 ```
+
+---
+من همه قسمت هارو نمیتونم برسی کنم واقعا طولانیه و تخصصی . قسمت هایی که بهتون قراره بگم ایناست.
+-  1. DISK / BLOCK DEVICE INFORMATION
+- 2. PARTITIONING
+- 3. FILESYSTEM
+- 4. MOUNT / UNMOUNT
+- 5. DISK SPACE USAGE
+- 7. DISK / I/O MONITORING
