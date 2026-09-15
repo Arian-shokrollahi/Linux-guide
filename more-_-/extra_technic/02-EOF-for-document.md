@@ -97,7 +97,7 @@ Current directory: $(pwd)
 1- در حالت عادی EOF که بدون سینگل کوت است گسترش ها اتفاق میوفته
 2- در حالت کی 'EOF'با سینگل کوت است گسترش اتفاق نمیوفته
 <p align="center">
-	<img src="00-0-images/EOF-withqoute.png" alt="EOF.terminal" width=500>
+	<img src="00-00-images/EOF-withqoute.png" alt="EOF.terminal" width=500>
 </p>
 ---
 ## و آخرین مثالی که از این قسمت بزنیم
@@ -126,5 +126,5 @@ echo "File created successfully."
 
 ```
 <p align="center">
-	<img src="00-0-images/EOFscript.png" alt="EOF.terminal" width=500>
+	<img src="00-00-images/EOFscript.png" alt="EOF.terminal" width=500>
 </p>
