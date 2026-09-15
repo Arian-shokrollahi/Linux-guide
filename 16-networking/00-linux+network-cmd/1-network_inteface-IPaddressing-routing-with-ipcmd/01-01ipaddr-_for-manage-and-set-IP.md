@@ -146,7 +146,7 @@ for IPV6--->(inet6 رو فقط نشون میده)
        valid_lft forever preferred_lft forever
 ```
 <p align="center">
-	<img src="00-00-images/exip.png" alt="ex1to5" width=600>
+	<img src="../00-00-images/exip.png" alt="ex1to5" width=600>
 </p>
 
 ---
@@ -164,7 +164,7 @@ sudo ifconfig ens33 192.168.1.10 netmask 255.255.255.0 up
 
 ```
 <p align="center">
-	<img src="00-00-images/changeipv4.png" alt="model6 changeip" width=600>
+	<img src="../00-00-images/changeipv4.png" alt="model6 changeip" width=600>
 </p>
 
 
