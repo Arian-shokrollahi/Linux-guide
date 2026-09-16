@@ -11,7 +11,7 @@
 
 1.  شما همانطور که میبیند ما دو تا ترمینال چپی WSL راستی هم سرور ماست در ماشین مجازی
 <p align="center">
-	<img src="../00-00-image/ssh1.png" alt="image" width=500>
+	<img src="../00-00-images/ssh1.png" alt="image" width=1200>
 </p>
 
 ---
@@ -23,20 +23,28 @@
 
 
 <p align="center">
-	<img src="../00-00-images/ssh3.png" alt="image" width=500>
+	<img src="../00-00-images/ssh3.png" alt="image" width=1200>
 </p>
+
+
 3. درست که کردید با دستور keygen و اون گزینه ها شما میرید سراغه پوشه ssh. که مخفی است درون ~ بعد ببنید یه فایلی با پسوند .pub درست شده که کلید عمومی شما و اونی که پسوند pub. نداره کلید خصوصی که اونو نباید در اختیار کسی یا جایی بزارید 
 4. حالا که ساختید یکبار تست میکنیم که به سرور وصل شیم
 
 <p align="center">
-	<img src="../00-00-images/ssh3.png" alt="image" width=500>
+	<img src="../00-00-images/ssh3.png" alt="image" width=1200>
 </p>
+
+
 5. همانطور که میبینید برایه وصل شدن به سرور password سرور رو میخواد
 6. اینجاست که میایم و اون public key رو کپی و دیگه رمز سرور رو وارد نمیکنیم و مارو میشناشه و درون authorized-key مار رو به خاطر میسپاره
 
+
+
 <p align="center">
-	<img src="../00-00-images/ssh4.png" alt="image" width=500>
+	<img src="../00-00-images/ssh4.png" alt="image" width=1200>
 </p>
+
+
 7.  حالا همانطور که میبیند بدون رمز وارد شدیم و در هاست در 
 ```
 ~/.ssh/authorized-key
