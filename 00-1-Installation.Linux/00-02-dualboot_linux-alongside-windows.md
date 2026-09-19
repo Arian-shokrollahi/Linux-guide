@@ -13,11 +13,17 @@
 <p align="center">
 	<img src="00-01-images/ventoy1.png" alt="" width=500>
 </p>
+
+
 - و رویه گزینه ویندوز بزنید 
+
+
 
 <p align="center">
 	<img src="00-01-images/ventoy2.png" alt="" width=500>
 </p>
+
+
 
  - همچین فضایی رو مشاهده میکنید که باید رویه فلشتون 
  - سپس install کلیک کنید
@@ -49,6 +55,8 @@
 <p align="center">
 	<img src="00-01-images/ventoy3.png" alt="" width=500>
 </p>
+
+
 - یه همچین صحفه ای میاد و رویه normal boot  بزنید
 - و وایسید تا اون لینوکسی که ریختید رو براتون بوت کنه
 
@@ -61,6 +69,8 @@
 <p align="center">
 	<img src="00-01-images/bootflag.png" alt="" width=500>
 </p>
+
+
 - این دستور رو بزنید -->set numberline boot off
 - بعد برید و لینوکس رو بریزید و بعد صحفه میره تو بوت لینوکس میگه فلش رو دربیارید 
 - درمیارید و رفتید تو لینوکس میزنید دوباره sudo parted 
