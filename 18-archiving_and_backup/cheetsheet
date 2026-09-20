@@ -1,0 +1,642 @@
+```
+                    FILE / DIRECTORY
+                           │
+             ┌─────────────┴─────────────┐
+             │                                                                         یک فایل                  چندفایل
+             │                           │
+             ▼                           ▼
+       Archive لازم داری             Compression؟
+             │                           │
+             ▼                     ┌─────┼─────┐
+            tar                    │     │     │
+             │                   gzip  bzip2  xz
+             ▼                    │     │     │
+        archive.tar               .gz  .bz2  .xz
+             │
+             ▼
+       Compression؟
+             │
+    ┌────────┼────────┐
+    │        │        │
+  gzip     bzip2      xz
+    │        │        │
+    ▼        ▼        ▼
+ .tar.gz  .tar.bz2  .tar.xz
+```
+# 1. اول تشخیص بده چه چیزی می‌خواهی
+
+قبل از اجرای command فقط این سؤال را از خودت بپرس:
+
+> **من فقط می‌خواهم حجم را کم کنم یا می‌خواهم چند فایل را یک‌جا جمع کنم؟**
+
+### فقط کاهش حجم:
+
+```
+gzip file
+```
+
+یا:
+
+```
+bzip2 file
+```
+
+یا:
+
+```
+xz file
+```
+
+---
+
+### چند فایل / directory را یک‌جا می‌خواهی:
+
+```
+tar -cf archive.tar files/
+```
+
+اینجا فقط **Archive** ساخته‌ای.
+
+---
+
+### چند فایل را یک‌جا + کاهش حجم:
+
+```
+tar -czf archive.tar.gz files/
+```
+
+یا:
+
+```
+tar -cjf archive.tar.bz2 files/
+```
+
+یا:
+
+```
+tar -cJf archive.tar.xz files/
+```
+
+---
+
+# 2. فرق Archive و Compression
+
+این را باید 100٪ در ذهنت داشته باشی:
+
+```
+Archive
+    =
+بسته‌بندی چند فایل در یک مجموعه
+```
+
+```
+Compression
+    =
+کم کردن حجم داده
+```
+
+پس:
+
+```
+tar
+ ↓
+Archive
+```
+
+و:
+
+```
+gzip / bzip2 / xz
+ ↓
+Compression
+```
+
+---
+
+# 3. یک فایل داری
+
+فرض کن:
+
+```
+database.sql
+```
+
+### فقط Compression
+
+با gzip:
+
+```
+gzip database.sql
+```
+
+نتیجه:
+
+```
+database.sql.gz
+```
+
+با bzip2:
+
+```
+bzip2 database.sql
+```
+
+نتیجه:
+
+```
+database.sql.bz2
+```
+
+با xz:
+
+```
+xz database.sql
+```
+
+نتیجه:
+
+```
+database.sql.xz
+```
+
+---
+
+# 4. چند فایل داری
+
+فرض کن:
+
+```
+project/
+├── app.py
+├── config.conf
+├── README.md
+└── logs/
+```
+
+اگر فقط می‌خواهی همه را در یک مجموعه قرار بدهی:
+
+```
+tar -cf project.tar project/
+```
+
+نتیجه:
+
+```
+project.tar
+```
+
+یعنی:
+
+```
+چند فایل
+   ↓
+ tar
+   ↓
+یک Archive
+```
+
+---
+
+# 5. چند فایل + Compression
+
+این رایج‌ترین حالت است.
+
+### gzip
+
+```
+tar -czf project.tar.gz project/
+```
+
+```
+project/
+   ↓
+ tar
+   ↓
+archive
+   ↓
+gzip
+   ↓
+project.tar.gz
+```
+
+---
+
+### bzip2
+
+```
+tar -cjf project.tar.bz2 project/
+```
+
+---
+
+### xz
+
+```
+tar -cJf project.tar.xz project/
+```
+
+---
+
+# 6. Extract کردن
+
+اینجا خیلی ساده است.
+
+### `.tar`
+
+```
+tar -xf project.tar
+```
+
+> Extract tar archive
+
+### `.tar.gz`
+
+```
+tar -xzf project.tar.gz
+```
+
+> Extract gzip-compressed archive
+
+### `.tar.bz2`
+
+```
+tar -xjf project.tar.bz2
+```
+
+> Extract bzip2-compressed archive
+
+### `.tar.xz`
+
+```
+tar -xJf project.tar.xz
+```
+
+> Extract xz-compressed archive
+
+---
+
+# 7. جدول سریع برای حفظ کردن
+
+|File|Create|Extract|
+|---|---|---|
+|`.tar`|`tar -cf`|`tar -xf`|
+|`.tar.gz`|`tar -czf`|`tar -xzf`|
+|`.tar.bz2`|`tar -cjf`|`tar -xjf`|
+|`.tar.xz`|`tar -cJf`|`tar -xJf`|
+|`.gz`|`gzip`|`gzip -d`|
+|`.bz2`|`bzip2`|`bzip2 -d`|
+|`.xz`|`xz`|`xz -d`|
+
+### Mental shortcut
+
+```
+-z → gzip
+-j → bzip2
+-J → xz
+```
+
+و:
+
+```
+-c → Create
+-x → Extract
+-t → List
+-f → File
+```
+
+پس:
+
+```
+tar -czf
+    │││
+    ││└── file
+    │└── gzip
+    └── create
+```
+
+---
+
+# 8. قبل از Extract چه کار کنیم؟
+
+لازم نیست همیشه مستقیم extract کنی.
+
+اول محتویات archive را ببین:
+
+```
+tar -tf backup.tar.gz
+```
+
+> List archive contents
+
+این خیلی مهم است.
+
+مثلاً:
+
+```
+backup.tar.gz
+├── etc/
+├── etc/nginx/
+├── etc/nginx/nginx.conf
+└── var/log/
+```
+
+بعد اگر مطمئن بودی:
+
+```
+tar -xzf backup.tar.gz
+```
+
+---
+
+# 9. Extract در یک مسیر مشخص
+
+مثلاً:
+
+```
+mkdir restore
+```
+
+بعد:
+
+```
+tar -xzf backup.tar.gz -C restore/
+```
+
+> Extract into a specific directory
+
+ساختار:
+
+```
+backup.tar.gz
+       ↓
+      tar
+       ↓
+    restore/
+```
+
+---
+
+# 10. Exclude کردن فایل‌ها
+
+مثلاً نمی‌خواهی logها داخل backup باشند:
+
+```
+tar -czf backup.tar.gz project/ --exclude="*.log"
+```
+
+> Archive without log files
+
+---
+
+# 11. سناریوی واقعی SysAdmin
+
+فرض کن:
+
+```
+/data/
+├── database/
+├── configs/
+├── uploads/
+└── logs/
+```
+
+می‌خواهی backup بگیری.
+
+### مرحله 1
+
+می‌خواهی چند directory را یک مجموعه کنی:
+
+```
+database + configs + uploads + logs
+```
+
+پس:
+
+```
+tar
+```
+
+### مرحله 2
+
+می‌خواهی حجم کمتر شود:
+
+```
+gzip
+```
+
+پس:
+
+```
+tar -czf data-backup.tar.gz /data/
+```
+
+نتیجه:
+
+```
+/data/
+   ↓
+ tar
+   ↓
+data-backup.tar
+   ↓
+ gzip
+   ↓
+data-backup.tar.gz
+```
+
+---
+
+# 12. برای سرعت بیشتر چه کار کنم؟
+
+اگر فقط می‌خواهی سریع کار را انجام بدهی، این patternها را حفظ کن:
+
+### Backup directory
+
+```
+tar -czf backup.tar.gz directory/
+```
+
+### Restore
+
+```
+tar -xzf backup.tar.gz
+```
+
+### دیدن محتویات
+
+```
+tar -tf backup.tar.gz
+```
+
+### Backup بدون بعضی فایل‌ها
+
+```
+tar -czf backup.tar.gz directory/ --exclude="*.log"
+```
+
+این چهار command برای شروع بخش بزرگی از کارهای روزمره را پوشش می‌دهند.
+
+---
+
+# 13. Compression را کجا استفاده می‌کنیم؟
+
+خیلی خلاصه:
+
+### 🟢 Backup
+
+```
+/data
+ ↓
+tar + compression
+ ↓
+backup.tar.gz
+```
+
+حجم backup کمتر می‌شود.
+
+---
+
+### 🟢 Log Management
+
+مثلاً log قدیمی:
+
+```
+access.log
+```
+
+تبدیل:
+
+```
+access.log.gz
+```
+
+برای کاهش فضای disk.
+
+---
+
+### 🟢 انتقال فایل
+
+مثلاً یک فایل بزرگ داریم:
+
+```
+large-database.sql
+```
+
+می‌توانیم قبل از انتقال compress کنیم:
+
+```
+large-database.sql
+       ↓
+large-database.sql.gz
+       ↓
+scp / rsync
+```
+
+حجم کمتر → معمولاً انتقال داده کمتر.
+
+---
+
+### 🟢 ذخیره‌سازی
+
+وقتی فایل‌ها را برای مدت طولانی نگه می‌داریم، compression می‌تواند فضای storage را کاهش دهد.
+
+---
+
+# 14. مهم‌ترین نکته
+
+**Compression همیشه به معنی بهتر بودن نیست.**
+
+Compression خودش CPU مصرف می‌کند:
+
+```
+Compression
+     ↓
+CPU work
+     ↓
+Smaller data
+```
+
+بنابراین در دنیای واقعی باید بین این‌ها trade-off داشته باشی:
+
+```
+Size
+  ↕
+CPU
+  ↕
+Time
+```
+
+مثلاً:
+
+```
+gzip
+→ معمولاً سریع و عمومی
+
+bzip2
+→ معمولاً compression متفاوت/بیشتر با هزینه پردازشی بالاتر
+
+xz
+→ معمولاً compression بالا، ولی می‌تواند CPU/time بیشتری بخواهد
+```
+
+---
+
+# 🚀 Cheat Sheet نهایی
+
+اگر فقط می‌خواهی سریع تصمیم بگیری:
+
+```
+یک فایل؟
+   │
+   └── فقط کوچک‌ترش کن
+          │
+          ├── gzip file
+          ├── bzip2 file
+          └── xz file
+```
+
+```
+چند فایل / directory؟
+   │
+   └── tar
+          │
+          ├── فقط Archive
+          │      └── tar -cf backup.tar files/
+          │
+          └── Archive + Compression
+                 │
+                 ├── gzip → tar -czf backup.tar.gz
+                 ├── bzip2 → tar -cjf backup.tar.bz2
+                 └── xz → tar -cJf backup.tar.xz
+```
+
+### فقط همین را حفظ کن:
+
+```
+tar  = جمع کردن
+gzip = فشرده کردن
+bzip2 = فشرده کردن
+xz = فشرده کردن
+```
+
+و:
+
+```
+tar.gz
+   =
+Archive + gzip
+```
+
+```
+tar.bz2
+   =
+Archive + bzip2
+```
+
+```
+tar.xz
+   =
+Archive + xz
+```
+
+**در عمل برای SysAdmin، وقتی می‌خواهی یک directory یا مجموعه‌ای از فایل‌ها را backup یا منتقل کنی، معمولاً** `**tar + compression**` **یکی از الگوهای اصلی است.**
