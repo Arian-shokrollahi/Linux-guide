@@ -1,8 +1,14 @@
 # ا-bzip2
 
-ا-`bzip2` یکی دیگر از ابزارهای استاندارد Linux برای **فشرده‌سازی فایل‌ها** است. از نظر فلسفه شبیه `gzip` است: اگر یک فایل داشته باشیم و فقط بخواهیم حجم آن را کم کنیم، می‌توانیم مستقیماً از `bzip2` استفاده کنیم.
+`ا-bzip2` یک ابزار برای **Compression** در Linux است. فلسفه‌اش تقریباً مثل `gzip` است: وقتی یک فایل داریم و می‌خواهیم حجم آن را کاهش دهیم، می‌توانیم آن را با `bzip2` فشرده کنیم.
 
-تفاوت مهم این است که `bzip2` معمولاً **compression بهتری نسبت به gzip** روی بعضی داده‌ها می‌دهد، اما در مقابل می‌تواند **CPU و زمان بیشتری** مصرف کند.
+تفاوت اصلی با `tar` این است که `bzip2` وظیفه‌ی **بسته‌بندی چند فایل در یک مجموعه** را ندارد؛ فقط compression انجام می‌دهد.
+
+```text
+gzip   → Compression
+bzip2  → Compression
+tar    → Archiving
+```
 
 ---
 
@@ -20,25 +26,39 @@ bzip2 [OPTIONS] FILE
 bzip2 access.log
 ```
 
-> ا-Compress a file with bzip2
+> Compress `access.log`
 
-نتیجه:
+قبل:
 
 ```text
 access.log
-    ↓
-  bzip2
-    ↓
+```
+
+بعد:
+
+```text
 access.log.bz2
 ```
 
-مثل `gzip`، فایل اصلی به‌صورت پیش‌فرض بعد از compression حذف می‌شود.
+یعنی:
 
-برای نگه داشتن فایل اصلی:
+```text
+access.log
+     ↓
+   bzip2
+     ↓
+access.log.bz2
+```
+
+به‌صورت پیش‌فرض، `bzip2` بعد از compression فایل اصلی را حذف می‌کند.
+
+اگر بخواهی فایل اصلی باقی بماند:
 
 ```bash
 bzip2 -k access.log
 ```
+
+> ا-Compress and keep the original
 
 نتیجه:
 
@@ -49,19 +69,27 @@ access.log.bz2
 
 ---
 
-## فلسفه‌ی `bzip2`
+## فلسفه‌ی bzip2 در کنار tar
 
-همان مفهومی که برای `gzip` گفتیم اینجا هم برقرار است:
+فرض کن یک فایل داریم:
 
 ```text
-یک فایل
-   ↓
-bzip2
-   ↓
-file.bz2
+database.sql
 ```
 
-اما اگر چند فایل یا directory داشته باشیم:
+فقط می‌خواهیم حجمش را کم کنیم:
+
+```bash
+bzip2 database.sql
+```
+
+نتیجه:
+
+```text
+database.sql.bz2
+```
+
+اما اگر یک directory داشته باشیم:
 
 ```text
 project/
@@ -69,9 +97,11 @@ project/
 ├── config.conf
 ├── README.md
 └── logs/
+    ├── access.log
+    └── error.log
 ```
 
-اول با `tar` آن‌ها را تبدیل به یک archive می‌کنیم:
+اینجا اول باید چند فایل را در یک archive قرار دهیم:
 
 ```text
 project/
@@ -81,7 +111,7 @@ project/
 project.tar
 ```
 
-بعد `bzip2` آن را compress می‌کند:
+بعد archive را با `bzip2` فشرده کنیم:
 
 ```text
 project/
@@ -90,26 +120,18 @@ project/
     ↓
 project.tar
     ↓
- bzip2
+  bzip2
     ↓
 project.tar.bz2
 ```
 
-در نتیجه:
+یا مستقیماً:
 
 ```bash
 tar -cjf project.tar.bz2 project/
 ```
 
-> ا-Create a bzip2-compressed archive
-
-اینجا:
-
-```text
--c  → Create
--j  → bzip2
--f  → Archive filename
-```
+> ا-Archive and compress with bzip2
 
 ---
 
@@ -117,37 +139,20 @@ tar -cjf project.tar.bz2 project/
 
 |Option|کاربرد|
 |---|---|
-|`-k`|فایل اصلی را نگه می‌دارد|
-|`-d`|Decompress کردن|
-|`-c`|خروجی را به stdout می‌فرستد|
-|`-f`|Force؛ overwrite کردن|
-|`-v`|نمایش اطلاعات هنگام اجرا|
-|`-1` تا `-9`|تعیین compression level|
-|`-t`|تست سالم بودن فایل|
-|`-z`|Compression|
+|`-d`|Decompress|
+|`-k`|Keep فایل اصلی|
+|`-c`|خروجی به stdout|
+|`-f`|Force|
+|`-v`|Verbose|
+|`-t`|Test integrity|
+|`-1` تا `-9`|Compression level|
 |`-q`|Quiet mode|
-
-### ا-`-k` — Keep
-
-به‌صورت پیش‌فرض:
-
-```bash
-bzip2 file.txt
-```
-
-فایل اصلی حذف می‌شود.
-
-برای نگه داشتن آن:
-
-```bash
-bzip2 -k file.txt
-```
-
-> ا-Compress and keep the original
 
 ---
 
-### ا-`-d` — Decompress
+## ا-`-d` — Decompress
+
+برای خارج کردن compression:
 
 ```bash
 bzip2 -d file.txt.bz2
@@ -155,11 +160,13 @@ bzip2 -d file.txt.bz2
 
 > ا-Decompress a bzip2 file
 
-یا command مخصوص آن:
+یا command مخصوص:
 
 ```bash
 bunzip2 file.txt.bz2
 ```
+
+> ا-Decompress a bzip2 file
 
 پس:
 
@@ -171,7 +178,36 @@ bunzip2
 
 ---
 
-### ا-`-c` — stdout
+## ا-`-k` — Keep
+
+به‌صورت پیش‌فرض:
+
+```bash
+bzip2 file.txt
+```
+
+فایل اصلی حذف می‌شود.
+
+اگر بخواهی آن را نگه داری:
+
+```bash
+bzip2 -k file.txt
+```
+
+> ا-Compress and keep original
+
+نتیجه:
+
+```text
+file.txt
+file.txt.bz2
+```
+
+---
+
+## ا-`-c` — stdout
+
+این option برای pipelineها خیلی مهم است:
 
 ```bash
 bzip2 -c file.txt > file.txt.bz2
@@ -179,19 +215,33 @@ bzip2 -c file.txt > file.txt.bz2
 
 > ا-Compress to stdout
 
-این برای pipelineها مهم است.
+اینجا `bzip2` خروجی را به stdout می‌فرستد و `>` آن را داخل فایل قرار می‌دهد.
 
 مثلاً:
 
 ```bash
-cat access.log | bzip2 > access.log.bz2
+ps aux | bzip2 > processes.txt.bz2
 ```
 
-> ا-Compress piped input
+> ا-Compress command output
 
 ---
 
-### ا-`-v` — Verbose
+## ا-`-f` — Force
+
+اگر فایل مقصد از قبل وجود داشته باشد:
+
+```bash
+bzip2 -f file.txt
+```
+
+> ا-Force compression
+
+برای زمانی که می‌خواهی بدون توقف به دلیل وجود فایل مقصد، عملیات انجام شود.
+
+---
+
+## ا-`-v` — Verbose
 
 ```bash
 bzip2 -v file.txt
@@ -199,38 +249,43 @@ bzip2 -v file.txt
 
 > ا-Show compression information
 
+اطلاعات مربوط به compression را نمایش می‌دهد.
+
 ---
 
-### `-1` تا `-9` — Compression Level
+## `-1` تا `-9` — Compression Level
 
-مثل `gzip`، `bzip2` هم level دارد:
+ا-`bzip2` چند سطح compression دارد:
 
 ```text
--1 → Faster / lower memory
--9 → More compression / more resources
+-1 → Faster / less memory
+-2
+-3
+...
+-9 → More compression / more memory
 ```
-
-سطح پیش‌فرض معمولاً `-9` است.
 
 مثلاً:
-
-```bash
-bzip2 -9 large-file.txt
-```
-
-> ا-Maximum compression
-
-یا:
 
 ```bash
 bzip2 -1 large-file.txt
 ```
 
-> ا-Faster compression
+> ا-Compress faster
+
+یا:
+
+```bash
+bzip2 -9 large-file.txt
+```
+
+> ا-Use maximum compression level
+
+در عمل، level بالاتر لزوماً به معنی کاهش بسیار زیاد حجم نیست؛ بسته به نوع داده، تفاوت می‌تواند کم باشد.
 
 ---
 
-### ا-`-t` — Test
+## ا-`-t` — Test
 
 برای بررسی سالم بودن فایل:
 
@@ -238,9 +293,9 @@ bzip2 -1 large-file.txt
 bzip2 -t backup.bz2
 ```
 
-> ا-Test archive integrity
+> ا-Test bzip2 file integrity
 
-این برای backupها مفید است.
+اگر سالم باشد معمولاً خروجی خاصی نمی‌بینی و exit status موفق خواهد بود.
 
 ---
 
@@ -252,7 +307,7 @@ bzip2 -t backup.bz2
 bzip2 access.log
 ```
 
-> ا-Compress a log file
+> Compress a log file
 
 نتیجه:
 
@@ -262,13 +317,13 @@ access.log.bz2
 
 ---
 
-## مثال 2 — فایل اصلی را نگه داریم
+## مثال 2 — نگه داشتن فایل اصلی
 
 ```bash
 bzip2 -k access.log
 ```
 
-> ا-Compress and keep original
+> Compress and keep original
 
 نتیجه:
 
@@ -285,7 +340,7 @@ access.log.bz2
 bzip2 -d access.log.bz2
 ```
 
-> ا-Decompress a bzip2 file
+> Decompress a log file
 
 یا:
 
@@ -293,15 +348,31 @@ bzip2 -d access.log.bz2
 bunzip2 access.log.bz2
 ```
 
+> Decompress a bzip2 file
+
 ---
 
-## مثال 4 — تست فایل
+## مثال 4 — تست سالم بودن
 
 ```bash
 bzip2 -t backup.bz2
 ```
 
-> ا-Test file integrity
+> Test backup integrity
+
+برای دیدن exit status:
+
+```bash
+echo $?
+```
+
+اگر:
+
+```text
+0
+```
+
+باشد، عملیات موفق بوده است.
 
 ---
 
@@ -311,40 +382,34 @@ bzip2 -t backup.bz2
 ps aux | bzip2 > processes.txt.bz2
 ```
 
-> ا-Compress command output
+> Compress command output
 
-و برای خواندن:
+برای خواندن بدون ساختن فایل decompressed:
 
 ```bash
 bzip2 -dc processes.txt.bz2
 ```
 
-> ا-Decompress to stdout
+> Decompress to stdout
 
 ---
 
-## مثال 6 — ترکیب `tar + bzip2`
+## مثال 6 — `tar + bzip2`
 
-یکی از مهم‌ترین کاربردهای `bzip2`:
+این یکی از مهم‌ترین کاربردهای `bzip2` است:
 
 ```bash
 tar -cjf backup.tar.bz2 /data/
 ```
 
-> ا-Create a bzip2-compressed archive
+> Create a bzip2-compressed archive
 
-ساختار:
+اینجا:
 
 ```text
-/data/
-   ↓
- tar
-   ↓
-backup.tar
-   ↓
-bzip2
-   ↓
-backup.tar.bz2
+-c → Create
+-j → bzip2
+-f → Archive filename
 ```
 
 برای Extract:
@@ -358,83 +423,88 @@ tar -xjf backup.tar.bz2
 اینجا:
 
 ```text
--c → Create
 -x → Extract
 -j → bzip2
--f → Filename
+-f → Archive filename
 ```
 
 ---
 
 # 4. bzip2 کجا به دردمان می‌خورد؟
 
-برای SysAdmin / DevOps، بیشتر با این حالت‌ها مواجه می‌شوی:
+### 1. فشرده کردن فایل‌های بزرگ
 
-### 1. Compression فایل‌ها
+مثلاً:
 
 ```bash
-bzip2 large-file.txt
+bzip2 database.sql
 ```
 
-وقتی یک فایل را می‌خواهی compress کنی.
+برای کم کردن حجم فایل.
 
 ---
 
-### 2. Backup / Archive
+### 2. Backup
+
+وقتی چند فایل و directory داریم:
 
 ```bash
 tar -cjf backup.tar.bz2 /data/
 ```
 
-وقتی چند فایل و directory داری و می‌خواهی:
+یعنی:
 
 ```text
-Archive + Compression
+/data/
+   ↓
+ tar
+   ↓
+Archive
+   ↓
+bzip2
+   ↓
+Compression
+   ↓
+backup.tar.bz2
 ```
-
-انجام بدهی.
 
 ---
 
-### 3. Log files
+### 3. Log management
 
-مثلاً log قدیمی:
+برای logهای قدیمی:
 
 ```bash
 bzip2 old.log
 ```
 
-به:
+و نتیجه:
 
 ```text
 old.log.bz2
 ```
 
-تبدیل می‌شود.
-
 ---
 
-# مقایسه‌ی `gzip` و `bzip2`
+# gzip در مقابل bzip2
 
-به‌صورت مفهومی:
-
-|ویژگی|`gzip`|`bzip2`|
+|ویژگی|gzip|bzip2|
 |---|---|---|
-|Compression|خوب|معمولاً بهتر|
-|سرعت|معمولاً سریع‌تر|معمولاً کندتر|
-|CPU|کمتر|بیشتر|
+|نوع|Compression|Compression|
 |پسوند|`.gz`|`.bz2`|
-|Decompress command|`gzip -d` / `gunzip`|`bzip2 -d` / `bunzip2`|
-|با `tar`|`tar.gz`|`tar.bz2`|
-|کاربرد|عمومی و بسیار رایج|وقتی compression بیشتر ارزش دارد|
+|سرعت|معمولاً سریع‌تر|معمولاً کندتر|
+|Compression|خوب|اغلب برای داده‌های مناسب، فشرده‌تر|
+|مصرف منابع|معمولاً کمتر|معمولاً بیشتر|
+|Decompress|`gzip -d`|`bzip2 -d`|
+|tar option|`-z`|`-j`|
 
-البته میزان compression کاملاً به نوع داده بستگی دارد؛ بنابراین نمی‌توان گفت `bzip2` همیشه خروجی کوچک‌تری از `gzip` می‌دهد.
+یک نکته مهم: **bzip2 همیشه از gzip بهتر compress نمی‌کند.** نتیجه به نوع داده بستگی دارد.
 
 ---
 
 # 🧠 Mental Model
 
-سه ابزار مهمی که تا اینجا یاد گرفتی:
+این قسمت را خوب در ذهنت نگه دار:
 
 ```text
 tar
@@ -460,20 +530,32 @@ file → file.bz2
 پس:
 
 ```text
-tar + gzip
-    ↓
-backup.tar.gz
+چند فایل
+   ↓
+  tar
+   ↓
+archive.tar
+   ↓
+bzip2
+   ↓
+archive.tar.bz2
 ```
 
-و:
+و به همین دلیل:
+
+```bash
+tar -cjf backup.tar.bz2 project/
+```
+
+یعنی:
 
 ```text
-tar + bzip2
-    ↓
-backup.tar.bz2
+-c  → Create archive
+-j  → Use bzip2
+-f  → Specify filename
 ```
 
-### مهم‌ترین commandها
+### Commandهای اصلی که باید بلد باشی
 
 ```bash
 bzip2 file
@@ -482,8 +564,11 @@ bzip2 -d file.bz2
 bunzip2 file.bz2
 bzip2 -t file.bz2
 bzip2 -c file > file.bz2
+
 tar -cjf backup.tar.bz2 directory/
 tar -xjf backup.tar.bz2
 ```
 
-**یک نکته‌ی مهم برای مسیر یادگیریت:** فعلاً لازم نیست `bzip2` را مثل `tar` خیلی عمیق حفظ کنی. چیزی که باید واقعاً در ذهنت بنشیند این است که `bzip2` یک **compression tool** است و `tar -j` یعنی «archive را با bzip2 فشرده کن».
+**خلاصه‌ی یک‌خطی:**
+
+> ا-`bzip2` مثل `gzip` یک ابزار **Compression** است؛ `tar` مسئول **Archive کردن** است؛ و `tar.bz2` حاصل ترکیب این دو است.
