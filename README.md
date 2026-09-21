@@ -1,5 +1,16 @@
-# راهنمای جامع لینوکس
+# Linux Guide
 
+[![Deploy Linux Guide](https://github.com/Arian-shokrollahi/Linux-guide/actions/workflows/pages.yml/badge.svg)](https://github.com/Arian-shokrollahi/Linux-guide/actions/workflows/pages.yml)
+
+[![Website](https://img.shields.io/badge/website-Linux%20Guide-2ea44f)](https://arian-shokrollahi.github.io/Linux-guide/)
+
+![License](https://img.shields.io/badge/license-All%20Rights%20Reserved-red)
+![HTML](https://img.shields.io/badge/HTML5-orange)
+![CSS](https://img.shields.io/badge/CSS3-blue)
+![JavaScript](https://img.shields.io/badge/JavaScript-yellow)
+![Persian](https://img.shields.io/badge/language-Persian-00a86b)
+
+راهنمای جامع و فارسی لینوکس، از مفاهیم پایه تا مدیریت سیستم و شبکه.
 <p align="center">
 	<img src="00-0-Introduction-and-terms/00-00-images/khodam.png" alt=""  width=500>
 </p>
