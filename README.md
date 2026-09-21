@@ -1,15 +1,20 @@
 # اموزش لینوکس-_-Linux Guide
 
-[![Deploy Linux Guide](https://github.com/Arian-shokrollahi/Linux-guide/actions/workflows/pages.yml/badge.svg)](https://github.com/Arian-shokrollahi/Linux-guide/actions/workflows/pages.yml)
+<p align="right">
+  <a href="https://github.com/Arian-shokrollahi/Linux-guide/actions/workflows/pages.yml">
+    <img src="https://github.com/Arian-shokrollahi/Linux-guide/actions/workflows/pages.yml/badge.svg" alt="Deploy Linux Guide">
+  </a>
 
-[![Website](https://img.shields.io/badge/website-Linux%20Guide-2ea44f)](https://arian-shokrollahi.github.io/Linux-guide/)
+  <a href="https://arian-shokrollahi.github.io/Linux-guide/">
+    <img src="https://img.shields.io/badge/website-Linux%20Guide-2ea44f" alt="Website">
+  </a>
 
-![License](https://img.shields.io/badge/license-All%20Rights%20Reserved-red)
-![HTML](https://img.shields.io/badge/HTML5-orange)
-![CSS](https://img.shields.io/badge/CSS3-blue)
-![JavaScript](https://img.shields.io/badge/JavaScript-yellow)
-![Persian](https://img.shields.io/badge/language-Persian-00a86b)
-
+  <img src="https://img.shields.io/badge/license-All%20Rights%20Reserved-red" alt="License">
+  <img src="https://img.shields.io/badge/HTML5-orange" alt="HTML5">
+  <img src="https://img.shields.io/badge/CSS3-blue" alt="CSS3">
+  <img src="https://img.shields.io/badge/JavaScript-yellow" alt="JavaScript">
+  <img src="https://img.shields.io/badge/language-Persian-00a86b" alt="Persian">
+</p>
 راهنمای جامع و فارسی لینوکس، از مفاهیم پایه تا مدیریت سیستم و شبکه.
 <p align="center">
 	<img src="00-0-Introduction-and-terms/00-00-images/khodam.png" alt=""  width=500>
