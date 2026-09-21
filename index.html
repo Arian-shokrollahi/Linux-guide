@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="راهنمای جامع و فارسی لینوکس؛ از مفاهیم پایه تا مدیریت سیستم، شبکه و اسکریپت‌نویسی." />
+    <meta name="theme-color" content="#07110d" />
+    <title>Linux Guide | راهنمای فارسی لینوکس</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vazirmatn@33.0.3/Vazirmatn-font-face.css" />
+    <link rel="stylesheet" href="assets/vendor/github-dark.min.css" />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <div class="brand-wrap">
+        <button class="icon-button mobile-menu-button" id="menuButton" type="button" aria-label="باز کردن فهرست" aria-expanded="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+        </button>
+        <a class="brand" href="#/" aria-label="صفحه اصلی Linux Guide">
+          <span class="brand-mark" aria-hidden="true">&gt;_</span>
+          <span class="brand-copy">
+            <strong>Linux Guide</strong>
+            <small>راهنمای فارسی لینوکس</small>
+          </span>
+        </a>
+      </div>
+
+      <div class="topbar-actions">
+        <div class="status-pill" title="وضعیت مستندات">
+          <span class="status-dot"></span>
+          <span>docs online</span>
+        </div>
+        <a class="icon-button" href="https://github.com/Arian-shokrollahi/Linux-guide" target="_blank" rel="noreferrer" aria-label="مشاهده در گیت‌هاب">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.86c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.84a9.5 9.5 0 0 1 2.5.34c1.91-1.3 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.75c0 .27.18.58.69.48A10 10 0 0 0 12 2Z" /></svg>
+        </a>
+        <button class="icon-button" id="themeButton" type="button" aria-label="تغییر حالت روشن و تاریک">
+          <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41" /></svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5a8.5 8.5 0 1 0 12 12Z" /></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="app-layout">
+      <aside class="sidebar" id="sidebar" aria-label="فهرست مستندات">
+        <div class="sidebar-inner">
+          <label class="search-box" for="searchInput">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+            <input id="searchInput" type="search" placeholder="جست‌وجو در آموزش‌ها..." autocomplete="off" />
+            <kbd>/</kbd>
+          </label>
+          <div class="search-meta" id="searchMeta" aria-live="polite"></div>
+          <nav class="docs-nav" id="docsNav"></nav>
+        </div>
+        <div class="sidebar-footer">
+          <span>ساخته‌شده برای یادگیری عملی</span>
+          <span class="terminal-cursor" aria-hidden="true"></span>
+        </div>
+      </aside>
+
+      <button class="sidebar-scrim" id="sidebarScrim" type="button" tabindex="-1" aria-label="بستن فهرست"></button>
+
+      <main class="main-content" id="mainContent">
+        <section class="landing" id="landing">
+          <div class="hero-grid">
+            <div class="hero-copy">
+              <span class="eyebrow"><span></span> مستندات متن‌باز فارسی</span>
+              <h1>لینوکس را<br /><em>واقعی</em> یاد بگیر.</h1>
+              <p>از اولین دستورها تا مدیریت سیستم، شبکه و اسکریپت‌نویسی؛ یک مسیر فارسی، ساختاریافته و کاملاً عملی.</p>
+              <div class="hero-actions">
+                <button class="primary-button" id="startButton" type="button">
+                  شروع یادگیری
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+                </button>
+                <button class="secondary-button" id="continueButton" type="button" hidden>ادامه مطالعه</button>
+              </div>
+            </div>
+
+            <div class="terminal-window" aria-label="نمونه ترمینال">
+              <div class="terminal-titlebar">
+                <div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+                <span>arian@linux-guide: ~</span>
+                <span></span>
+              </div>
+              <div class="terminal-body" dir="ltr">
+                <p><span class="prompt">arian@linux-guide</span>:<span class="path">~</span>$ whoami</p>
+                <p class="terminal-output">future-linux-admin</p>
+                <p><span class="prompt">arian@linux-guide</span>:<span class="path">~</span>$ cat roadmap.txt</p>
+                <div class="roadmap-output">
+                  <span><b>01</b> Linux fundamentals</span>
+                  <span><b>02</b> System administration</span>
+                  <span><b>03</b> Networking & security</span>
+                  <span><b>04</b> Bash automation</span>
+                </div>
+                <p><span class="prompt">arian@linux-guide</span>:<span class="path">~</span>$ <span class="typing-command">start --learning</span><span class="block-cursor"></span></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="stats-row" id="statsRow"></div>
+
+          <section class="topics-section">
+            <div class="section-heading">
+              <div>
+                <span class="eyebrow"><span></span> مسیرهای یادگیری</span>
+                <h2>از کجا شروع کنم؟</h2>
+              </div>
+              <span class="section-command" dir="ltr">$ ls ./topics</span>
+            </div>
+            <div class="topic-grid" id="topicGrid"></div>
+          </section>
+        </section>
+
+        <section class="document-view" id="documentView" hidden>
+          <div class="document-toolbar">
+            <nav class="breadcrumbs" id="breadcrumbs" aria-label="مسیر صفحه"></nav>
+            <div class="document-meta" id="documentMeta"></div>
+          </div>
+          <article class="markdown-body" id="article"></article>
+          <nav class="page-navigation" id="pageNavigation" aria-label="صفحه قبل و بعد"></nav>
+        </section>
+
+        <section class="error-view" id="errorView" hidden>
+          <span class="error-code">404</span>
+          <h1>این فایل پیدا نشد.</h1>
+          <p>ممکن است مسیر فایل تغییر کرده باشد یا هنوز به مستندات اضافه نشده باشد.</p>
+          <a class="primary-button" href="#/">بازگشت به صفحه اصلی</a>
+        </section>
+      </main>
+
+      <aside class="toc-panel" id="tocPanel" aria-label="فهرست این صفحه">
+        <div class="toc-sticky">
+          <strong>در این صفحه</strong>
+          <nav id="tocNav"></nav>
+          <a class="edit-link" id="editLink" href="https://github.com/Arian-shokrollahi/Linux-guide" target="_blank" rel="noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z" /></svg>
+            ویرایش این صفحه
+          </a>
+        </div>
+      </aside>
+    </div>
+
+    <button class="back-to-top" id="backToTop" type="button" aria-label="بازگشت به بالا">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m18 15-6-6-6 6" /></svg>
+    </button>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="assets/vendor/marked.min.js"></script>
+    <script src="assets/vendor/purify.min.js"></script>
+    <script src="assets/vendor/highlight.min.js"></script>
+    <script src="assets/content-index.js"></script>
+    <script src="assets/app.js"></script>
+  </body>
+</html>
