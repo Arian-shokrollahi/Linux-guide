@@ -15,7 +15,7 @@
   <img src="https://img.shields.io/badge/JavaScript-yellow" alt="JavaScript">
   <img src="https://img.shields.io/badge/language-Persian-00a86b" alt="Persian">
 </p>
-راهنمای جامع و فارسی لینوکس، از مفاهیم پایه تا مدیریت سیستم و شبکه.
+
 <p align="center">
 	<img src="00-0-Introduction-and-terms/00-00-images/khodam.png" alt=""  width=500>
 </p>
