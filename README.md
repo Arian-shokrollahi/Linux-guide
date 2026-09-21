@@ -13,7 +13,8 @@
 مبانی و نصب ← کار با خط فرمان ← فایل‌ها و مسیرها ← دسترسی‌ها و پردازش‌ها ← بسته‌ها و دیسک ← شبکه ← پردازش متن ← اسکریپت‌نویسی
 
 ### و اگر دوست ندارید به صورت داکیومنتی بخونید به این ادرس بروید
-(linux book site)[https://arian-shokrollahi.github.io/Linux-guide/]
+[linux book site](https://arian-shokrollahi.github.io/Linux-guide/)
+
 
 ## فهرست فصل‌ها
 
